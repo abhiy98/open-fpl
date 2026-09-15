@@ -6,7 +6,6 @@ import getOgImage from "@open-fpl/app/features/OpenGraphImages/getOgImage";
 import { useSettings } from "@open-fpl/app/features/Settings/Settings";
 import useTeamPlannerRedirect from "@open-fpl/app/features/TeamPlanner/useTeamPlannerRedirect";
 import { NextSeo } from "next-seo";
-import Link from "next/link";
 
 const TransferPlannerSetupPage = () => {
   const { profile } = useTeamPlannerRedirect();
@@ -25,13 +24,11 @@ const TransferPlannerSetupPage = () => {
             <Text as="span">
               Please wait while we are bringing you to your Team Planner page.
             </Text>
-            <Link href={`/teams/${profile}`} passHref>
-              <A>
-                <Button size="md" onClick={onSettingsModalOpen} variant="link">
-                  Click here if it does not work
-                </Button>
-              </A>
-            </Link>
+            <A href={`/teams/${profile}`}>
+              <Button size="md" onClick={onSettingsModalOpen} variant="link">
+                Click here if it does not work
+              </Button>
+            </A>
           </VStack>
         }
       />
