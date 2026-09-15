@@ -1,16 +1,10 @@
-const { withPlausibleProxy } = require("next-plausible");
-
-module.exports = withPlausibleProxy()({
+module.exports = {
   experimental: {
     externalDir: true,
   },
-  async redirects() {
-    return [
-      {
-        source: "/help",
-        destination: "/help/dashboard",
-        permanent: true,
-      },
-    ];
+  output: "export",
+  trailingSlash: true,
+  images: {
+    unoptimized: true,
   },
-});
+};
