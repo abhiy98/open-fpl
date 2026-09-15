@@ -7,18 +7,18 @@ const useTeamPlannerRedirect = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (isInitialised) {
-      let redirectPath: string;
-      if (profile) {
-        redirectPath = `/teams/${profile}`;
-      } else {
-        redirectPath = "/teams";
+    if (!isInitialised) return;
+
+    if (profile) {
+      // Team Planner is served through a Cloudflare Pages rewrite, so use a
+      // full navigation instead of Next.js client routing for this dynamic URL.
+      if (window.location.pathname !== `/teams/${profile}`) {
+        window.location.assign(`/teams/${profile}`);
       }
-      if (router.route !== redirectPath) {
-        router.push(redirectPath);
-      }
+    } else if (window.location.pathname !== "/teams") {
+      router.push("/teams");
     }
-  }, [profile, isInitialised]);
+  }, [profile, isInitialised, router]);
 
   return { profile, isInitialised };
 };
